@@ -5,9 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { X, Image, Link2, Hash } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface CreatePostProps {
   onClose: () => void;
+  onPostCreated?: (post: any) => void;
 }
 
 const postCategories = [
@@ -17,20 +19,45 @@ const postCategories = [
   { id: "discussion", label: "Discussion", color: "bg-orange-100 text-orange-800 border-orange-200" }
 ];
 
-export function CreatePost({ onClose }: CreatePostProps) {
+export function CreatePost({ onClose, onPostCreated }: CreatePostProps) {
   const [content, setContent] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [isAnonymous, setIsAnonymous] = useState(true);
+  const [isPosting, setIsPosting] = useState(false);
+  const { toast } = useToast();
 
-  const handlePost = () => {
+  const handlePost = async () => {
     if (!content.trim() || !selectedCategory) return;
     
-    // Here you would normally send the post to your backend
-    console.log("Creating post:", { content, category: selectedCategory, anonymous: isAnonymous });
+    setIsPosting(true);
+    
+    // Simulate posting delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    const newPost = {
+      id: Date.now().toString(),
+      username: isAnonymous ? "@anonymous_user" : "@current_user",
+      trustLevel: "bronze" as const,
+      timeAgo: "just now",
+      content: content.trim(),
+      upvotes: 0,
+      downvotes: 0,
+      comments: 0,
+      category: selectedCategory as "query" | "solution" | "job" | "discussion"
+    };
+    
+    // Call callback if provided
+    onPostCreated?.(newPost);
+    
+    toast({
+      title: "Post Created!",
+      description: "Your post has been shared with the community.",
+    });
     
     // Reset form and close
     setContent("");
     setSelectedCategory("");
+    setIsPosting(false);
     onClose();
   };
 
@@ -122,9 +149,9 @@ export function CreatePost({ onClose }: CreatePostProps) {
               variant="hero" 
               className="flex-1"
               onClick={handlePost}
-              disabled={!content.trim() || !selectedCategory}
+              disabled={!content.trim() || !selectedCategory || isPosting}
             >
-              Post
+              {isPosting ? "Posting..." : "Post"}
             </Button>
           </div>
         </div>

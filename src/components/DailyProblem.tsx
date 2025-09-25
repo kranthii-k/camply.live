@@ -2,8 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { TrustBadge } from "@/components/TrustBadge";
 import { Crown, Clock, User } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export function DailyProblem() {
+  const { toast } = useToast();
+
   return (
     <Card className="p-6 bg-gradient-card border-accent/20 shadow-medium sticky top-4">
       <div className="flex items-center gap-2 mb-4">
@@ -46,7 +49,16 @@ export function DailyProblem() {
           </div>
         </div>
 
-        <Button variant="accent" className="w-full">
+        <Button 
+          variant="accent" 
+          className="w-full"
+          onClick={() => {
+            toast({
+              title: "Daily Problem",
+              description: "Opening full discussion thread...",
+            });
+          }}
+        >
           View Full Discussion
         </Button>
       </div>

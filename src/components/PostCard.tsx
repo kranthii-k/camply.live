@@ -4,6 +4,7 @@ import { TrustBadge } from "@/components/TrustBadge";
 import { ChevronUp, ChevronDown, MessageCircle, Share } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface PostCardProps {
   id: string;
@@ -39,6 +40,8 @@ export function PostCard({
   const [userVote, setUserVote] = useState<"up" | "down" | null>(null);
   const [currentUpvotes, setCurrentUpvotes] = useState(upvotes);
   const [currentDownvotes, setCurrentDownvotes] = useState(downvotes);
+  const [currentComments, setCurrentComments] = useState(comments);
+  const { toast } = useToast();
 
   const handleVote = (type: "up" | "down") => {
     if (userVote === type) {
@@ -122,11 +125,32 @@ export function PostCard({
 
           {/* Actions */}
           <div className="flex items-center gap-4 pt-2">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-muted-foreground hover:text-foreground"
+              onClick={() => {
+                toast({
+                  title: "Comments",
+                  description: "Opening comments section...",
+                });
+              }}
+            >
               <MessageCircle className="h-4 w-4" />
-              {comments} comments
+              {currentComments} comments
             </Button>
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-muted-foreground hover:text-foreground"
+              onClick={() => {
+                navigator.clipboard.writeText(content);
+                toast({
+                  title: "Shared!",
+                  description: "Post content copied to clipboard",
+                });
+              }}
+            >
               <Share className="h-4 w-4" />
               Share
             </Button>

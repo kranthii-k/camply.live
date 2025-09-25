@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { PostCard } from "@/components/PostCard";
 import { Filter, Plus } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const mockPosts = [
   {
@@ -57,20 +59,136 @@ const mockPosts = [
     downvotes: 8,
     comments: 67,
     category: "discussion" as const
+  },
+  {
+    id: "6",
+    username: "@frontend_wizard",
+    trustLevel: "gold" as const,
+    timeAgo: "14h ago",
+    content: "Created a React component library with 50+ components and TypeScript support. Includes dark mode, animations, and accessibility features. Open source and ready for production use! 🚀",
+    upvotes: 178,
+    downvotes: 2,
+    comments: 45,
+    category: "solution" as const
+  },
+  {
+    id: "7",
+    username: "@crypto_student",
+    trustLevel: "bronze" as const,
+    timeAgo: "16h ago",
+    content: "Has anyone worked with blockchain development? I'm trying to understand smart contracts and Web3 integration. Looking for study buddies or mentorship opportunities.",
+    upvotes: 34,
+    downvotes: 5,
+    comments: 28,
+    category: "query" as const
+  },
+  {
+    id: "8",
+    username: "@data_scientist_pro",
+    trustLevel: "platinum" as const,
+    timeAgo: "18h ago",
+    content: "Sharing my journey from CS student to Data Scientist at Netflix. Key skills: Python, SQL, Machine Learning, Statistics. Happy to review resumes and provide career guidance!",
+    upvotes: 298,
+    downvotes: 6,
+    comments: 89,
+    category: "discussion" as const
+  },
+  {
+    id: "9",
+    username: "@mobile_dev_ninja",
+    trustLevel: "silver" as const,
+    timeAgo: "20h ago",
+    content: "Built a cross-platform mobile app using React Native for my final year project. Features include real-time chat, push notifications, and offline sync. Tech stack: RN, Firebase, Redux.",
+    upvotes: 67,
+    downvotes: 1,
+    comments: 23,
+    category: "solution" as const
+  },
+  {
+    id: "10",
+    username: "@intern_seeker_2025",
+    trustLevel: "bronze" as const,
+    timeAgo: "1d ago",
+    content: "Amazon SDE Intern interview next week! Any tips for the coding rounds? I've been practicing on LeetCode but feeling nervous about the behavioral questions. What should I expect?",
+    upvotes: 156,
+    downvotes: 3,
+    comments: 78,
+    category: "job" as const
+  },
+  {
+    id: "11",
+    username: "@ai_researcher",
+    trustLevel: "platinum" as const,
+    timeAgo: "1d ago",
+    content: "Published my first research paper on computer vision! 'Efficient Object Detection using Transformer Architecture' - accepted at CVPR 2024. DM if you want to discuss the methodology or collaborate!",
+    upvotes: 445,
+    downvotes: 12,
+    comments: 134,
+    category: "discussion" as const
+  },
+  {
+    id: "12",
+    username: "@cloud_architect",
+    trustLevel: "gold" as const,
+    timeAgo: "1d ago",
+    content: "Deployed my first serverless application on AWS! Used Lambda, API Gateway, DynamoDB, and S3. Cost optimization was tricky but managed to keep it under $5/month. Architecture diagram in comments!",
+    upvotes: 123,
+    downvotes: 4,
+    comments: 56,
+    category: "solution" as const
   }
 ];
 
 export function Feed() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [posts, setPosts] = useState(mockPosts);
+  const { toast } = useToast();
+
+  const handleFilterClick = (filter: string) => {
+    setActiveFilter(filter);
+    toast({
+      title: "Filter Applied",
+      description: `Showing ${filter === "all" ? "all posts" : filter} posts`,
+    });
+  };
+
+  const handleCreatePost = () => {
+    toast({
+      title: "Create Post",
+      description: "Post creation feature opened!",
+    });
+  };
+
+  const filteredPosts = activeFilter === "all" 
+    ? posts 
+    : posts.filter(post => {
+        if (activeFilter === "queries") return post.category === "query";
+        if (activeFilter === "solutions") return post.category === "solution";
+        if (activeFilter === "jobs") return post.category === "job";
+        if (activeFilter === "discussions") return post.category === "discussion";
+        return true;
+      });
+
   return (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
         <h1 className="text-xl font-bold text-foreground md:hidden">StudNet</h1>
         <div className="flex items-center gap-2 ml-auto">
-          <Button variant="ghost" size="sm" className="md:hidden">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="md:hidden"
+            onClick={() => toast({ title: "Filter", description: "Filter options opened!" })}
+          >
             <Filter className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" size="sm" className="md:hidden">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="md:hidden"
+            onClick={handleCreatePost}
+          >
             <Plus className="h-4 w-4" />
           </Button>
         </div>
@@ -78,16 +196,46 @@ export function Feed() {
 
       {/* Filter Tabs - Desktop */}
       <div className="hidden md:flex items-center gap-2 px-4">
-        <Button variant="outline" size="sm">All</Button>
-        <Button variant="outline" size="sm">Queries</Button>
-        <Button variant="outline" size="sm">Solutions</Button>
-        <Button variant="outline" size="sm">Jobs</Button>
-        <Button variant="outline" size="sm">Discussions</Button>
+        <Button 
+          variant={activeFilter === "all" ? "default" : "outline"} 
+          size="sm"
+          onClick={() => handleFilterClick("all")}
+        >
+          All
+        </Button>
+        <Button 
+          variant={activeFilter === "queries" ? "default" : "outline"} 
+          size="sm"
+          onClick={() => handleFilterClick("queries")}
+        >
+          Queries
+        </Button>
+        <Button 
+          variant={activeFilter === "solutions" ? "default" : "outline"} 
+          size="sm"
+          onClick={() => handleFilterClick("solutions")}
+        >
+          Solutions
+        </Button>
+        <Button 
+          variant={activeFilter === "jobs" ? "default" : "outline"} 
+          size="sm"
+          onClick={() => handleFilterClick("jobs")}
+        >
+          Jobs
+        </Button>
+        <Button 
+          variant={activeFilter === "discussions" ? "default" : "outline"} 
+          size="sm"
+          onClick={() => handleFilterClick("discussions")}
+        >
+          Discussions
+        </Button>
       </div>
 
       {/* Posts */}
       <div className="space-y-4 px-4 pb-20 md:pb-4">
-        {mockPosts.map((post) => (
+        {filteredPosts.map((post) => (
           <PostCard key={post.id} {...post} />
         ))}
       </div>

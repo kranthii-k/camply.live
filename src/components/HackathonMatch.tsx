@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { TrustBadge } from "@/components/TrustBadge";
 import { Heart, X, MapPin, Calendar } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface HackathonProfile {
   id: string;
@@ -31,13 +32,27 @@ const mockProfile: HackathonProfile = {
 
 export function HackathonMatch() {
   const [currentAction, setCurrentAction] = useState<"like" | "pass" | null>(null);
+  const { toast } = useToast();
 
   const handleAction = (action: "like" | "pass") => {
     setCurrentAction(action);
+    
+    if (action === "like") {
+      toast({
+        title: "Match Sent! 🎉",
+        description: "Your connection request has been sent to @code_ninja_99",
+      });
+    } else {
+      toast({
+        title: "Finding Next Teammate",
+        description: "Loading the next potential teammate...",
+      });
+    }
+    
     // Simulate loading next profile
     setTimeout(() => {
       setCurrentAction(null);
-    }, 1000);
+    }, 2000);
   };
 
   return (
