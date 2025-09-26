@@ -3,6 +3,7 @@ import { Feed } from "@/components/Feed";
 import { Search } from "@/components/Search";
 import { Explore } from "@/components/Explore";
 import { Match } from "@/components/Match";
+import { Placements } from "@/components/Placements";
 import { Profile } from "@/components/Profile";
 import { CreatePost } from "@/components/CreatePost";
 import { useState } from "react";
@@ -29,6 +30,8 @@ const Index = () => {
         return <Explore />;
       case "match":
         return <Match />;
+      case "placements":
+        return <Placements />;
       case "profile":
         return <Profile />;
       default:

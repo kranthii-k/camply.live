@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Home, Search, Heart, PlusSquare, User, Trophy, Users } from "lucide-react";
+import { Home, Search, Heart, PlusSquare, User, Trophy, Users, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface NavigationProps {
@@ -13,6 +13,7 @@ const navItems = [
   { id: "post", icon: PlusSquare, label: "Post" },
   { id: "daily", icon: Trophy, label: "Daily" },
   { id: "match", icon: Heart, label: "Match" },
+  { id: "placements", icon: Briefcase, label: "Placements" },
   { id: "profile", icon: User, label: "Profile" }
 ];
 

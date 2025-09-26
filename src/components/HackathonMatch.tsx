@@ -18,21 +18,70 @@ interface HackathonProfile {
   bio: string;
 }
 
-const mockProfile: HackathonProfile = {
-  id: "1",
-  username: "@code_ninja_99",
-  trustLevel: "gold",
-  skills: ["React", "Node.js", "Python", "ML"],
-  location: "San Francisco, CA",
-  experience: "3+ years",
-  lookingFor: "Backend Developer",
-  hackathon: "TechCrunch Disrupt 2024",
-  bio: "Passionate full-stack developer looking for a ML expert to build an AI-powered fintech solution!"
-};
+const mockProfiles: HackathonProfile[] = [
+  {
+    id: "1",
+    username: "@code_ninja_99",
+    trustLevel: "gold",
+    skills: ["React", "Node.js", "Python", "ML"],
+    location: "San Francisco, CA",
+    experience: "3+ years",
+    lookingFor: "Backend Developer",
+    hackathon: "TechCrunch Disrupt 2024",
+    bio: "Passionate full-stack developer looking for a ML expert to build an AI-powered fintech solution!"
+  },
+  {
+    id: "2",
+    username: "@design_guru",
+    trustLevel: "platinum",
+    skills: ["Figma", "UI/UX", "Prototyping", "Branding"],
+    location: "New York, NY",
+    experience: "5+ years",
+    lookingFor: "Frontend Developer",
+    hackathon: "Design Sprint 2024",
+    bio: "Award-winning designer seeking creative developers to build beautiful, user-centric applications!"
+  },
+  {
+    id: "3",
+    username: "@data_wizard",
+    trustLevel: "silver",
+    skills: ["Python", "TensorFlow", "Analytics", "SQL"],
+    location: "Austin, TX",
+    experience: "2+ years",
+    lookingFor: "Product Manager",
+    hackathon: "AI Hackathon 2024",
+    bio: "Data scientist passionate about turning insights into impactful products. Let's solve real problems!"
+  },
+  {
+    id: "4",
+    username: "@blockchain_dev",
+    trustLevel: "gold",
+    skills: ["Solidity", "Web3", "React", "Smart Contracts"],
+    location: "Miami, FL",
+    experience: "4+ years",
+    lookingFor: "UI/UX Designer",
+    hackathon: "Web3 Summit 2024",
+    bio: "Building the future of decentralized finance. Need a creative designer to make DeFi accessible!"
+  },
+  {
+    id: "5",
+    username: "@mobile_master",
+    trustLevel: "bronze",
+    skills: ["React Native", "Flutter", "iOS", "Android"],
+    location: "Seattle, WA",
+    experience: "1+ year",
+    lookingFor: "Backend Developer",
+    hackathon: "Mobile Innovation 2024",
+    bio: "Fresh graduate excited about mobile development. Looking for experienced backend developers!"
+  }
+];
 
 export function HackathonMatch() {
   const [currentAction, setCurrentAction] = useState<"like" | "pass" | null>(null);
+  const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
   const { toast } = useToast();
+
+  const currentProfile = mockProfiles[currentProfileIndex];
 
   const handleAction = (action: "like" | "pass") => {
     setCurrentAction(action);
@@ -40,7 +89,7 @@ export function HackathonMatch() {
     if (action === "like") {
       toast({
         title: "Match Sent! 🎉",
-        description: "Your connection request has been sent to @code_ninja_99",
+        description: `Your connection request has been sent to ${currentProfile.username}`,
       });
     } else {
       toast({
@@ -52,6 +101,7 @@ export function HackathonMatch() {
     // Simulate loading next profile
     setTimeout(() => {
       setCurrentAction(null);
+      setCurrentProfileIndex((prev) => (prev + 1) % mockProfiles.length);
     }, 2000);
   };
 
@@ -66,17 +116,17 @@ export function HackathonMatch() {
         {/* Profile Header */}
         <div className="text-center space-y-2">
           <div className="flex items-center justify-center gap-2">
-            <h3 className="text-xl font-bold text-foreground">{mockProfile.username}</h3>
-            <TrustBadge level={mockProfile.trustLevel} />
+            <h3 className="text-xl font-bold text-foreground">{currentProfile.username}</h3>
+            <TrustBadge level={currentProfile.trustLevel} />
           </div>
           <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-1">
               <MapPin className="h-3 w-3" />
-              <span>{mockProfile.location}</span>
+              <span>{currentProfile.location}</span>
             </div>
             <div className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
-              <span>{mockProfile.experience}</span>
+              <span>{currentProfile.experience}</span>
             </div>
           </div>
         </div>
@@ -84,15 +134,15 @@ export function HackathonMatch() {
         {/* Hackathon Info */}
         <div className="p-3 bg-accent/10 rounded-lg text-center">
           <p className="text-sm text-muted-foreground">Looking for</p>
-          <p className="font-semibold text-accent">{mockProfile.lookingFor}</p>
-          <p className="text-xs text-muted-foreground mt-1">for {mockProfile.hackathon}</p>
+          <p className="font-semibold text-accent">{currentProfile.lookingFor}</p>
+          <p className="text-xs text-muted-foreground mt-1">for {currentProfile.hackathon}</p>
         </div>
 
         {/* Skills */}
         <div>
           <p className="text-sm font-medium text-foreground mb-2">Skills</p>
           <div className="flex flex-wrap gap-2">
-            {mockProfile.skills.map((skill) => (
+            {currentProfile.skills.map((skill) => (
               <Badge key={skill} variant="secondary" className="text-xs">
                 {skill}
               </Badge>
@@ -104,7 +154,7 @@ export function HackathonMatch() {
         <div>
           <p className="text-sm font-medium text-foreground mb-2">About</p>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            {mockProfile.bio}
+            {currentProfile.bio}
           </p>
         </div>
 

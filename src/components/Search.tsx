@@ -10,14 +10,24 @@ const trendingTopics = [
   { tag: "React", posts: 1234, icon: Code },
   { tag: "System Design", posts: 856, icon: TrendingUp },
   { tag: "FAANG Jobs", posts: 672, icon: Briefcase },
-  { tag: "Hackathons", posts: 445, icon: Users }
+  { tag: "Hackathons", posts: 445, icon: Users },
+  { tag: "AI/ML", posts: 987, icon: Code },
+  { tag: "Web Development", posts: 756, icon: TrendingUp },
+  { tag: "Startup Ideas", posts: 543, icon: Briefcase },
+  { tag: "Study Groups", posts: 321, icon: Users }
 ];
 
 const suggestedUsers = [
   { username: "@tech_guru_99", trustLevel: "platinum" as const, speciality: "System Architecture" },
   { username: "@ml_researcher", trustLevel: "gold" as const, speciality: "Machine Learning" },
   { username: "@startup_founder", trustLevel: "gold" as const, speciality: "Entrepreneurship" },
-  { username: "@security_expert", trustLevel: "silver" as const, speciality: "Cybersecurity" }
+  { username: "@security_expert", trustLevel: "silver" as const, speciality: "Cybersecurity" },
+  { username: "@data_scientist", trustLevel: "gold" as const, speciality: "Data Analytics" },
+  { username: "@mobile_dev_pro", trustLevel: "silver" as const, speciality: "Mobile Development" },
+  { username: "@blockchain_guru", trustLevel: "platinum" as const, speciality: "Web3 Development" },
+  { username: "@product_manager", trustLevel: "gold" as const, speciality: "Product Strategy" },
+  { username: "@design_master", trustLevel: "silver" as const, speciality: "UI/UX Design" },
+  { username: "@devops_ninja", trustLevel: "bronze" as const, speciality: "Cloud Infrastructure" }
 ];
 
 export function Search() {
@@ -84,6 +94,24 @@ export function Search() {
             </Badge>
             <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
               Research
+            </Badge>
+            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+              Web Development
+            </Badge>
+            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+              Data Science
+            </Badge>
+            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+              Mobile Apps
+            </Badge>
+            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+              DevOps
+            </Badge>
+            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+              Design
+            </Badge>
+            <Badge variant="secondary" className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+              Freelancing
             </Badge>
           </div>
         </div>
