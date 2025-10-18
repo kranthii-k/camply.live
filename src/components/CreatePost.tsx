@@ -7,9 +7,21 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
+interface Post {
+  id: string;
+  username: string;
+  trustLevel: "bronze" | "silver" | "gold" | "platinum";
+  timeAgo: string;
+  content: string;
+  upvotes: number;
+  downvotes: number;
+  comments: number;
+  category: "query" | "solution" | "job" | "discussion";
+}
+
 interface CreatePostProps {
   onClose: () => void;
-  onPostCreated?: (post: any) => void;
+  onPostCreated?: (post: Post) => void;
 }
 
 const postCategories = [

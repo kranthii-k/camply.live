@@ -87,7 +87,7 @@ export function Explore() {
             </div>
 
             {/* Quick Actions */}
-            <Card className="p-6 bg-gradient-card">
+            <Card className="p-6 bg-card">
               <h3 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h3>
               <div className="grid grid-cols-2 gap-4">
                 <Button 

@@ -10,7 +10,17 @@ import { Separator } from "@/components/ui/separator";
 import { Plus, Search, Star, MessageCircle, Users, Trophy, Zap, X, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-const mockTeamMembers = [
+interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  skills: string[];
+  rating: number;
+  projects: number;
+  avatar: string;
+}
+
+const mockTeamMembers: TeamMember[] = [
   { id: 1, name: "Alex Chen", role: "Frontend Developer", skills: ["React", "TypeScript", "UI/UX"], rating: 4.8, projects: 12, avatar: "AC" },
   { id: 2, name: "Sarah Kumar", role: "Backend Developer", skills: ["Node.js", "Python", "Database"], rating: 4.9, projects: 8, avatar: "SK" },
   { id: 3, name: "Mike Torres", role: "Designer", skills: ["Figma", "Photoshop", "Branding"], rating: 4.7, projects: 15, avatar: "MT" },
@@ -19,7 +29,7 @@ const mockTeamMembers = [
   { id: 6, name: "Lisa Zhang", role: "Product Manager", skills: ["Strategy", "Analytics", "Leadership"], rating: 4.9, projects: 14, avatar: "LZ" },
 ];
 
-interface TeamMember {
+interface FilledTeamMember {
   name: string;
   role: string;
   filled: boolean;
@@ -33,7 +43,7 @@ interface CreateTeamDialogProps {
 export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) {
   const { toast } = useToast();
   const [teamName, setTeamName] = useState("");
-  const [members, setMembers] = useState<TeamMember[]>([
+  const [members, setMembers] = useState<FilledTeamMember[]>([
     { name: "", role: "", filled: false },
     { name: "", role: "", filled: false },
     { name: "", role: "", filled: false },
@@ -43,7 +53,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
   const [selectedMemberIndex, setSelectedMemberIndex] = useState<number | null>(null);
   const [currentStep, setCurrentStep] = useState<'basic' | 'members' | 'review'>('basic');
 
-  const updateMember = (index: number, field: keyof TeamMember, value: string | boolean) => {
+  const updateMember = (index: number, field: keyof FilledTeamMember, value: string | boolean) => {
     const newMembers = [...members];
     newMembers[index] = { ...newMembers[index], [field]: value };
     setMembers(newMembers);
@@ -70,7 +80,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
     setShowMatches(true);
   };
 
-  const handleSelectMember = (memberData: any) => {
+  const handleSelectMember = (memberData: TeamMember) => {
     if (selectedMemberIndex !== null) {
       updateMember(selectedMemberIndex, "name", memberData.name);
       updateMember(selectedMemberIndex, "role", memberData.role);
@@ -185,7 +195,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
             {/* Step 1: Basic Info */}
             {currentStep === 'basic' && (
               <div className="space-y-6 animate-fade-in">
-                <Card className="p-6 bg-gradient-card border-2">
+                <Card className="p-6 bg-card border-2">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
@@ -333,7 +343,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
             {/* Step 3: Review */}
             {currentStep === 'review' && (
               <div className="space-y-6 animate-fade-in">
-                <Card className="p-6 bg-gradient-card border-2">
+                <Card className="p-6 bg-card border-2">
                   <div className="text-center space-y-4">
                     <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto">
                       <Trophy className="h-8 w-8 text-white" />

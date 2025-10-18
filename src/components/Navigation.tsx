@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Home, Search, Heart, PlusSquare, User, Trophy, Users, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
 
 interface NavigationProps {
   activeTab: string;
@@ -47,11 +48,14 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
       {/* Desktop Side Navigation */}
       <nav className="hidden md:flex fixed left-0 top-0 h-full w-64 bg-background border-r border-border flex-col z-40">
         <div className="p-6">
-          <div className="flex items-center gap-2 mb-8">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Users className="h-5 w-5 text-white" />
+          <div className="flex items-center justify-between gap-2 mb-8">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+                <Users className="h-5 w-5 text-white" />
+              </div>
+              <h1 className="text-xl font-bold text-foreground">Camply</h1>
             </div>
-            <h1 className="text-xl font-bold text-foreground">Camply</h1>
+            <ModeToggle />
           </div>
           
           <div className="space-y-2">

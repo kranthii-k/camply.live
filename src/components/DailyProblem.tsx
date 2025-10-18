@@ -8,7 +8,7 @@ export function DailyProblem() {
   const { toast } = useToast();
 
   return (
-    <Card className="p-6 bg-gradient-card border-accent/20 shadow-medium sticky top-4">
+    <Card className="p-6 bg-card border-accent/20 shadow-medium sticky top-4">
       <div className="flex items-center gap-2 mb-4">
         <Crown className="h-5 w-5 text-accent" />
         <h2 className="text-lg font-semibold text-foreground">Problem of the Day</h2>
