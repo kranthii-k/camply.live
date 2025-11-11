@@ -68,6 +68,9 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
       });
       return;
     }
+    const member = members[index];
+    updateMember(index, "name", member.name);
+    updateMember(index, "role", member.role);
     updateMember(index, "filled", true);
     toast({
       title: "Member Added",
@@ -82,9 +85,14 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
 
   const handleSelectMember = (memberData: TeamMember) => {
     if (selectedMemberIndex !== null) {
-      updateMember(selectedMemberIndex, "name", memberData.name);
-      updateMember(selectedMemberIndex, "role", memberData.role);
-      updateMember(selectedMemberIndex, "filled", true);
+      const newMembers = [...members];
+      newMembers[selectedMemberIndex] = {
+        ...newMembers[selectedMemberIndex],
+        name: memberData.name,
+        role: memberData.role,
+        filled: true,
+      };
+      setMembers(newMembers);
       setShowMatches(false);
       setSelectedMemberIndex(null);
       toast({
@@ -156,7 +164,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden animate-scale-in">
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
           <DialogHeader className="space-y-4 pb-4">
             <DialogTitle className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
               Create Your Dream Team
@@ -191,7 +199,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
             </div>
           </DialogHeader>
 
-          <div className="overflow-y-auto flex-1 space-y-6">
+          <div className="space-y-6">
             {/* Step 1: Basic Info */}
             {currentStep === 'basic' && (
               <div className="space-y-6 animate-fade-in">
@@ -396,7 +404,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
 
       {/* Team Member Matches Dialog */}
       <Dialog open={showMatches} onOpenChange={setShowMatches}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-xl font-bold">Find Perfect Team Member</DialogTitle>
             <p className="text-muted-foreground">Browse and connect with talented individuals</p>
