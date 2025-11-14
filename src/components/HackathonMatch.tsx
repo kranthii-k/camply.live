@@ -24,10 +24,10 @@ const mockProfiles: HackathonProfile[] = [
     username: "@code_ninja_99",
     trustLevel: "gold",
     skills: ["React", "Node.js", "Python", "ML"],
-    location: "San Francisco, CA",
+    location: "Bengaluru, Karnataka",
     experience: "3+ years",
     lookingFor: "Backend Developer",
-    hackathon: "TechCrunch Disrupt 2024",
+    hackathon: "TechCrunch Disrupt 2025",
     bio: "Passionate full-stack developer looking for a ML expert to build an AI-powered fintech solution!"
   },
   {
@@ -35,10 +35,10 @@ const mockProfiles: HackathonProfile[] = [
     username: "@design_guru",
     trustLevel: "platinum",
     skills: ["Figma", "UI/UX", "Prototyping", "Branding"],
-    location: "New York, NY",
-    experience: "5+ years",
+    location: "Mysore, Karnataka",
+    experience: "2+ years",
     lookingFor: "Frontend Developer",
-    hackathon: "Design Sprint 2024",
+    hackathon: "Design Sprint 2025",
     bio: "Award-winning designer seeking creative developers to build beautiful, user-centric applications!"
   },
   {
@@ -46,7 +46,7 @@ const mockProfiles: HackathonProfile[] = [
     username: "@data_wizard",
     trustLevel: "silver",
     skills: ["Python", "TensorFlow", "Analytics", "SQL"],
-    location: "Austin, TX",
+    location: "Hyderabad, TG",
     experience: "2+ years",
     lookingFor: "Product Manager",
     hackathon: "AI Hackathon 2024",
@@ -57,7 +57,7 @@ const mockProfiles: HackathonProfile[] = [
     username: "@blockchain_dev",
     trustLevel: "gold",
     skills: ["Solidity", "Web3", "React", "Smart Contracts"],
-    location: "Miami, FL",
+    location: "Amaravathi, AP",
     experience: "4+ years",
     lookingFor: "UI/UX Designer",
     hackathon: "Web3 Summit 2024",
@@ -68,7 +68,7 @@ const mockProfiles: HackathonProfile[] = [
     username: "@mobile_master",
     trustLevel: "bronze",
     skills: ["React Native", "Flutter", "iOS", "Android"],
-    location: "Seattle, WA",
+    location: "Kolkata, WB",
     experience: "1+ year",
     lookingFor: "Backend Developer",
     hackathon: "Mobile Innovation 2024",
@@ -185,7 +185,7 @@ export function HackathonMatch() {
         {currentAction && (
           <div className="text-center p-4 bg-primary/5 rounded-lg animate-bounce-in">
             <p className="text-sm text-primary font-medium">
-              {currentAction === "like" ? "Match sent! 🎉" : "Finding next teammate..."}
+              {currentAction === "like" ? "Match sent! " : "Finding next teammate..."}
             </p>
           </div>
         )}

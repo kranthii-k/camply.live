@@ -21,12 +21,12 @@ interface TeamMember {
 }
 
 const mockTeamMembers: TeamMember[] = [
-  { id: 1, name: "Alex Chen", role: "Frontend Developer", skills: ["React", "TypeScript", "UI/UX"], rating: 4.8, projects: 12, avatar: "AC" },
+  { id: 1, name: "Kranthi K", role: "Frontend Developer", skills: ["React", "TypeScript", "UI/UX"], rating: 4.8, projects: 12, avatar: "AC" },
   { id: 2, name: "Sarah Kumar", role: "Backend Developer", skills: ["Node.js", "Python", "Database"], rating: 4.9, projects: 8, avatar: "SK" },
-  { id: 3, name: "Mike Torres", role: "Designer", skills: ["Figma", "Photoshop", "Branding"], rating: 4.7, projects: 15, avatar: "MT" },
+  { id: 3, name: "Krishna raj", role: "Designer", skills: ["Figma", "Photoshop", "Branding"], rating: 4.7, projects: 15, avatar: "MT" },
   { id: 4, name: "Emma Wilson", role: "Data Scientist", skills: ["Python", "ML", "Analytics"], rating: 4.6, projects: 6, avatar: "EW" },
-  { id: 5, name: "James Park", role: "DevOps Engineer", skills: ["AWS", "Docker", "CI/CD"], rating: 4.8, projects: 10, avatar: "JP" },
-  { id: 6, name: "Lisa Zhang", role: "Product Manager", skills: ["Strategy", "Analytics", "Leadership"], rating: 4.9, projects: 14, avatar: "LZ" },
+  { id: 5, name: "Prateek khened", role: "DevOps Engineer", skills: ["AWS", "Docker", "CI/CD"], rating: 4.8, projects: 10, avatar: "JP" },
+  { id: 6, name: "Md rahim", role: "Product Manager", skills: ["Strategy", "Analytics", "Leadership"], rating: 4.9, projects: 14, avatar: "LZ" },
 ];
 
 interface FilledTeamMember {
@@ -129,7 +129,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
     }
 
     toast({
-      title: "Team Created! 🎉",
+      title: "Team Created! Next Step is To Win!!!",
       description: `Team "${teamName}" has been created with ${filledMembers} members.`,
     });
     onOpenChange(false);

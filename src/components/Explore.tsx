@@ -12,29 +12,78 @@ import { useToast } from "@/hooks/use-toast";
 
 const upcomingHackathons = [
   {
-    name: "TechCrunch Disrupt 2024",
-    date: "Dec 15-17, 2024",
-    location: "San Francisco, CA",
+    name: "TechCrunch Disrupt 2025",
+    date: "Dec 15-17, 2025",
+    location: "Bengaluru, KA",
     participants: 1200,
-    prizes: "$100K",
+    prizes: "₹100K",
     tags: ["AI", "Fintech", "Web3"]
   },
   {
-    name: "MIT Hackathon",
-    date: "Jan 20-22, 2025", 
-    location: "Cambridge, MA",
-    participants: 800,
-    prizes: "$50K",
-    tags: ["Healthcare", "Climate", "Education"]
+    name: "RVCE TreeHacks",
+    date: "Feb 14-16, 2026",
+    location: "Bengaluru, KA", 
+    participants: 1500,
+    prizes: "₹175K",
+    tags: ["Social Impact", "AR/VR", "IoT"]
   },
   {
-    name: "Stanford TreeHacks",
-    date: "Feb 14-16, 2025",
-    location: "Stanford, CA", 
+name: "CodeRush Delhi",
+date: "Nov 18-20, 2024",
+location: "New Delhi, India",
+participants: 650,
+prizes: "₹5L",
+tags: ["AI/ML", "Fintech", "Web3"]
+},
+{
+name: "TechVortex Mumbai",
+date: "Dec 5-7, 2024",
+location: "Mumbai, India",
+participants: 450,
+prizes: "₹8L",
+tags: ["IoT", "Robotics", "Automation"]
+},
+{
+name: "DataStorm Bangalore",
+date: "Jan 12-14, 2025",
+location: "Bangalore, India",
+participants: 750,
+prizes: "₹42L",
+tags: ["Data Science", "Analytics", "Cloud"]
+},
+{
+name: "CyberHack Hyderabad",
+date: "Feb 8-10, 2025",
+location: "Hyderabad, India",
+participants: 550,
+prizes: "₹31L",
+tags: ["Cybersecurity", "Blockchain", "Privacy"]
+},
+{
+name: "InnovateX Chennai",
+date: "Mar 15-17, 2025",
+location: "Chennai, India",
+participants: 900,
+prizes: "₹5L",
+tags: ["Startups", "E-commerce", "Mobile"]
+},
+{
+name: "GreenCode Pune",
+date: "Apr 22-24, 2025",
+location: "Pune, India",
+participants: 600,
+prizes: "₹8L",
+tags: ["Sustainability", "Clean Energy", "Environment"]
+},
+  {
+    name: "Stanford Hackathon - International",
+    date: "Jan 20-29, 2026", 
+    location: "SanFrancisco, SA",
     participants: 1500,
-    prizes: "$75K",
-    tags: ["Social Impact", "AR/VR", "IoT"]
+    prizes: "$200K",
+    tags: ["AI", "ML", "DeepTech"]
   }
+  
 ];
 
 export function Explore() {

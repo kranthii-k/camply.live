@@ -51,15 +51,15 @@ export function Profile() {
                 <h2 className="text-2xl font-bold text-foreground">@code_student_99</h2>
                 <TrustBadge level="gold" />
               </div>
-              <p className="text-muted-foreground mb-2">Computer Science • Stanford University</p>
+              <p className="text-muted-foreground mb-2">Computer Science • RNSIT</p>
               <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <MapPin className="h-3 w-3" />
-                  <span>San Francisco, CA</span>
+                  <span>Bengaluru , KA</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="h-3 w-3" />
-                  <span>Joined March 2024</span>
+                  <span>Joined March 2025</span>
                 </div>
               </div>
             </div>
