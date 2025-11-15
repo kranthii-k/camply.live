@@ -58,6 +58,10 @@ export function CreatePost({ onClose, onPostCreated }: CreatePostProps) {
       category: selectedCategory as "query" | "solution" | "job" | "discussion"
     };
     
+    // Save to local storage
+    const existingPosts = JSON.parse(localStorage.getItem("posts") || "[]");
+    localStorage.setItem("posts", JSON.stringify([newPost, ...existingPosts]));
+
     // Call callback if provided
     onPostCreated?.(newPost);
     
@@ -90,7 +94,7 @@ export function CreatePost({ onClose, onPostCreated }: CreatePostProps) {
             <label className="text-sm font-medium text-foreground mb-3 block">
               Select Category
             </label>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {postCategories.map((category) => (
                 <Badge
                   key={category.id}

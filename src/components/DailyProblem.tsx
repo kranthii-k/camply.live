@@ -3,9 +3,16 @@ import { Button } from "@/components/ui/button";
 import { TrustBadge } from "@/components/TrustBadge";
 import { Crown, Clock, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { DailyProblemDiscussion } from "./DailyProblemDiscussion";
 
 export function DailyProblem() {
   const { toast } = useToast();
+  const [showDiscussion, setShowDiscussion] = useState(false);
+
+  if (showDiscussion) {
+    return <DailyProblemDiscussion onBack={() => setShowDiscussion(false)} />;
+  }
 
   return (
     <Card className="p-6 bg-card border-accent/20 shadow-medium sticky top-4">
@@ -52,12 +59,7 @@ export function DailyProblem() {
         <Button 
           variant="accent" 
           className="w-full"
-          onClick={() => {
-            toast({
-              title: "Daily Problem",
-              description: "Opening full discussion thread...",
-            });
-          }}
+          onClick={() => setShowDiscussion(true)}
         >
           View Full Discussion
         </Button>

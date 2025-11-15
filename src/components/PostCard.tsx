@@ -73,9 +73,9 @@ export function PostCard({
 
   return (
     <Card className={cn("p-6 hover:shadow-medium transition-all duration-300 animate-fade-in", className)}>
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         {/* Voting Section */}
-        <div className="flex flex-col items-center gap-2 pt-1">
+        <div className="flex flex-row sm:flex-col items-center gap-2 pt-1">
           <Button
             variant="upvote"
             size="icon"
@@ -106,7 +106,7 @@ export function PostCard({
         {/* Content Section */}
         <div className="flex-1 space-y-3">
           {/* Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-foreground">{username}</span>
@@ -124,7 +124,7 @@ export function PostCard({
           <p className="text-foreground leading-relaxed">{content}</p>
 
           {/* Actions */}
-          <div className="flex items-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 pt-2">
             <Button 
               variant="ghost" 
               size="sm" 

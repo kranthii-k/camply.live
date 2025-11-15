@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrustBadge } from "@/components/TrustBadge";
 import { Settings, Share, Trophy, MessageCircle, ThumbsUp, Calendar, MapPin } from "lucide-react";
+import { Team } from "@/components/Team";
 
 const userStats = {
   posts: 47,
@@ -146,6 +147,9 @@ export function Profile() {
             ))}
           </div>
         </div>
+
+        {/* Past Teams */}
+        <Team />
 
         {/* Actions */}
         <div className="grid grid-cols-2 gap-4">

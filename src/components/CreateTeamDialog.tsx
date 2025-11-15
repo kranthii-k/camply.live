@@ -40,6 +40,12 @@ interface CreateTeamDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+export interface Team {
+  name: string;
+  members: FilledTeamMember[];
+}
+
+
 export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) {
   const { toast } = useToast();
   const [teamName, setTeamName] = useState("");
@@ -118,8 +124,8 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
       return;
     }
 
-    const filledMembers = members.filter(m => m.filled).length;
-    if (filledMembers === 0) {
+    const filledMembers = members.filter(m => m.filled);
+    if (filledMembers.length === 0) {
       toast({
         title: "Error",
         description: "Please add at least one team member",
@@ -128,9 +134,18 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
       return;
     }
 
+    const newTeam: Team = {
+      name: teamName,
+      members: filledMembers,
+    };
+
+    // Save to local storage
+    const existingTeams = JSON.parse(localStorage.getItem("teams") || "[]");
+    localStorage.setItem("teams", JSON.stringify([...existingTeams, newTeam]));
+
     toast({
       title: "Team Created! Next Step is To Win!!!",
-      description: `Team "${teamName}" has been created with ${filledMembers} members.`,
+      description: `Team "${teamName}" has been created with ${filledMembers.length} members.`,
     });
     onOpenChange(false);
     setTeamName("");

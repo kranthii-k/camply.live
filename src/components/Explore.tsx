@@ -235,7 +235,7 @@ export function Explore() {
                         </div>
                         <div className="flex gap-2">
                           <Button variant="outline" size="sm">Learn More</Button>
-                          <Button variant="accent" size="sm">Find Team</Button>
+                          <Button variant="accent" size="sm" onClick={() => setCreateTeamOpen(true)}>Find Team</Button>
                         </div>
                       </div>
                     </div>

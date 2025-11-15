@@ -2,33 +2,34 @@ import { Button } from "@/components/ui/button";
 import { Home, Search, Heart, PlusSquare, User, Trophy, Users, Briefcase } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Link, useLocation } from "react-router-dom";
 
 interface NavigationProps {
-  activeTab: string;
   onTabChange: (tab: string) => void;
 }
 
-const navItems = [
-  { id: "feed", icon: Home, label: "Feed" },
-  { id: "search", icon: Search, label: "Search" },
-  { id: "post", icon: PlusSquare, label: "Post" },
-  { id: "daily", icon: Trophy, label: "Daily" },
-  { id: "match", icon: Heart, label: "Match" },
-  { id: "placements", icon: Briefcase, label: "Placements" },
-  { id: "profile", icon: User, label: "Profile" }
+export const navItems = [
+  { id: "feed", icon: Home, label: "Feed", href: "/" },
+  { id: "post", icon: PlusSquare, label: "Post", href: "" },
+  { id: "daily", icon: Trophy, label: "Daily", href: "/daily" },
+  { id: "match", icon: Heart, label: "Match", href: "/match" },
+  { id: "placements", icon: Briefcase, label: "Placements", href: "/placements" },
+  { id: "profile", icon: User, label: "Profile", href: "/profile" }
 ];
 
-export function Navigation({ activeTab, onTabChange }: NavigationProps) {
+export function Navigation({ onTabChange }: NavigationProps) {
+  const location = useLocation();
+  const activeTab = location.pathname === '/' ? 'feed' : location.pathname.substring(1);
+
   return (
     <>
       {/* Mobile Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border md:hidden">
         <div className="flex items-center justify-around py-2">
           {navItems.map((item) => (
-            <Button
+            <Link
               key={item.id}
-              variant="ghost"
-              size="sm"
+              to={item.href}
               className={cn(
                 "flex flex-col items-center gap-1 h-auto py-2 px-3",
                 activeTab === item.id && "text-primary"
@@ -40,7 +41,7 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
                 activeTab === item.id && "fill-current"
               )} />
               <span className="text-xs">{item.label}</span>
-            </Button>
+            </Link>
           ))}
         </div>
       </nav>
@@ -60,26 +61,28 @@ export function Navigation({ activeTab, onTabChange }: NavigationProps) {
           
           <div className="space-y-2">
             {navItems.map((item) => (
-              <Button
+              <Link
                 key={item.id}
-                variant="ghost"
+                to={item.href}
                 className={cn(
-                  "w-full justify-start gap-3 h-12",
-                  activeTab === item.id && "bg-primary/10 text-primary"
+                  "w-full justify-start gap-3 h-12 flex items-center px-4 rounded-lg",
+                  activeTab === item.id ? "bg-primary/10 text-primary" : "hover:bg-accent/50"
                 )}
                 onClick={() => onTabChange(item.id)}
               >
                 <item.icon className="h-6 w-6" />
                 <span className="text-base">{item.label}</span>
-              </Button>
+              </Link>
             ))}
           </div>
         </div>
         
         <div className="mt-auto p-6">
-          <Button variant="hero" className="w-full" onClick={() => onTabChange('login')}>
-            Join Network
-          </Button>
+          <Link to="/login" className="w-full">
+            <Button variant="hero" className="w-full">
+              Join Network
+            </Button>
+          </Link>
         </div>
       </nav>
     </>
