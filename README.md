@@ -41,3 +41,4 @@ This project is built with:
 - Tailwind CSS
 
 
+Thanks to the Contributors of the Project!!!
