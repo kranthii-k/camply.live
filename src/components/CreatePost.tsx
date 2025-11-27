@@ -39,43 +39,64 @@ export function CreatePost({ onClose, onPostCreated }: CreatePostProps) {
   const { toast } = useToast();
 
   const handlePost = async () => {
+    // 1. Validation: Don't send if empty
     if (!content.trim() || !selectedCategory) return;
-    
-    setIsPosting(true);
-    
-    // Simulate posting delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const newPost = {
-      id: Date.now().toString(),
-      username: isAnonymous ? "@anonymous_user" : "@current_user",
-      trustLevel: "bronze" as const,
-      timeAgo: "just now",
-      content: content.trim(),
-      upvotes: 0,
-      downvotes: 0,
-      comments: 0,
-      category: selectedCategory as "query" | "solution" | "job" | "discussion"
-    };
-    
-    // Save to local storage
-    const existingPosts = JSON.parse(localStorage.getItem("posts") || "[]");
-    localStorage.setItem("posts", JSON.stringify([newPost, ...existingPosts]));
 
-    // Call callback if provided
-    onPostCreated?.(newPost);
-    
-    toast({
-      title: "Post Created!",
-      description: "Your post has been shared with the community.",
-    });
-    
-    // Reset form and close
-    setContent("");
-    setSelectedCategory("");
-    setIsPosting(false);
-    onClose();
+    setIsPosting(true);
+
+    try {
+      // 2. Prepare the Payload
+      const dataToSend = {
+        username: isAnonymous ? "@anonymous_user" : "@current_user",
+        trustLevel: "bronze",
+        // MAPPING: Backend expects 'comment', you have 'content'
+        comment: content.trim(),
+        category: selectedCategory
+      };
+
+      // 3. Send it (The Attack! ⚔️)
+      const response = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+
+      // 4. Success! Get the official receipt
+      const savedPost = await response.json();
+
+      // 5. Update the UI immediately
+      if (onPostCreated) {
+        onPostCreated(savedPost);
+      }
+
+      toast({
+        title: "Success!",
+        description: "Your post is live!",
+      });
+
+      // Cleanup
+      setContent("");
+      setSelectedCategory("");
+      onClose();
+
+    } catch (error) {
+      console.error("Error creating post:", error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Could not connect to the server.",
+      });
+    } finally {
+      setIsPosting(false);
+    }
   };
+
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
@@ -161,8 +182,8 @@ export function CreatePost({ onClose, onPostCreated }: CreatePostProps) {
             <Button variant="outline" className="flex-1" onClick={onClose}>
               Cancel
             </Button>
-            <Button 
-              variant="hero" 
+            <Button
+              variant="hero"
               className="flex-1"
               onClick={handlePost}
               disabled={!content.trim() || !selectedCategory || isPosting}
