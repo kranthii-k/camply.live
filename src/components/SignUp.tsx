@@ -3,30 +3,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { useRegister } from "@/hooks/api/useAuth";
 
 export function SignUp() {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { toast } = useToast();
+  const registerMutation = useRegister();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !username || !email || !password) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields.",
-        variant: "destructive",
-      });
-      return;
-    }
-    // TODO: Add actual sign-up logic here
-    toast({
-      title: "Success",
-      description: "You have successfully signed up!",
-    });
+    registerMutation.mutate({ username, email, password, name });
   };
 
   return (
@@ -44,7 +32,7 @@ export function SignUp() {
             <Input
               id="name"
               type="text"
-              placeholder="Enter Your Cute & Sweet Name Here"
+              placeholder="John Doe"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -77,13 +65,18 @@ export function SignUp() {
             <Input
               id="password"
               type="password"
+              placeholder="Min 8 chars, 1 uppercase, 1 number"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button type="submit" className="w-full">
-            Sign Up
+          <Button 
+            type="submit" 
+            className="w-full"
+            disabled={registerMutation.isPending}
+          >
+            {registerMutation.isPending ? "Creating Account..." : "Sign Up"}
           </Button>
         </form>
         <div className="text-center mt-4">

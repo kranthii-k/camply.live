@@ -28,10 +28,9 @@ const App = () => (
             <Route path="match" element={<Match />} />
             <Route path="placements" element={<Placements />} />
             <Route path="profile" element={<Profile />} />
-            <Route path="login" element={<Login onSwitchToSignUp={() => {}} />} />
-            <Route path="signup" element={<SignUp onSwitchToLogin={() => {}} />} />
           </Route>
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
