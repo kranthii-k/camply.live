@@ -16,11 +16,6 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: mode === "production",
-      },
-    },
     rollupOptions: {
       output: {
         manualChunks: {
