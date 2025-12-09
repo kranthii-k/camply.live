@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Calendar, MapPin, Users, Trophy, Zap, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { SEO } from "@/components/SEO";
 
 const upcomingHackathons = [
   {
@@ -102,11 +103,13 @@ export function Explore() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
-        <h1 className="text-xl font-bold text-foreground md:hidden">Explore</h1>
-      </div>
+    <>
+      <SEO />
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
+          <h1 className="text-xl font-bold text-foreground md:hidden">Explore</h1>
+        </div>
 
       <div className="px-4 space-y-6 pb-20 md:pb-4">
         <Tabs defaultValue="featured" className="space-y-6">
@@ -251,6 +254,7 @@ export function Explore() {
         open={createTeamOpen} 
         onOpenChange={setCreateTeamOpen} 
       />
-    </div>
+      </div>
+    </>
   );
 }

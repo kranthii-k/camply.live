@@ -5,6 +5,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Briefcase, Building, Users, Clock, ChevronRight, Star, MessageCircle, Share2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { SEO } from "@/components/SEO";
 
 interface PlacementData {
   id: string;
@@ -302,7 +303,9 @@ export function Placements() {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO />
+      <div className="space-y-6">
       {/* Header */}
       <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
         <h1 className="text-xl font-bold text-foreground md:hidden">Placements</h1>
@@ -467,6 +470,7 @@ export function Placements() {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

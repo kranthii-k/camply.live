@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { TrustBadge } from "@/components/TrustBadge";
 import { Settings, Share, Trophy, MessageCircle, ThumbsUp, Calendar, MapPin } from "lucide-react";
 import { Team } from "@/components/Team";
+import { SEO } from "@/components/SEO";
 
 const userStats = {
   posts: 47,
@@ -21,11 +22,13 @@ const recentActivity = [
 
 export function Profile() {
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-foreground md:hidden">Profile</h1>
+    <>
+      <SEO />
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-bold text-foreground md:hidden">Profile</h1>
           <div className="flex items-center gap-2 ml-auto">
             <Button variant="ghost" size="sm">
               <Share className="h-4 w-4" />
@@ -161,6 +164,7 @@ export function Profile() {
           </Button>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

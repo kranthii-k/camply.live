@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { CreatePost } from "./CreatePost";
 import { Input } from "@/components/ui/input";
+import { SEO } from "@/components/SEO";
+import { generateWebSiteSchema } from "@/utils/seo";
 
 const initialMockPosts = [
   {
@@ -708,10 +710,12 @@ export function Feed() {
   });
 
   return (
-    <div className="space-y-4">
-      {/* Header */}
-      <div className="flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
-        <h1 className="text-xl font-bold text-foreground md:hidden">Camply</h1>
+    <>
+      <SEO structuredData={generateWebSiteSchema()} />
+      <div className="space-y-4">
+        {/* Header */}
+        <div className="flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
+          <h1 className="text-xl font-bold text-foreground md:hidden">Camply</h1>
         <div className="flex items-center gap-2 ml-auto">
           <Button 
             variant="ghost" 
@@ -797,6 +801,7 @@ export function Feed() {
           onPostCreated={handlePostCreated}
         />
       )}
-    </div>
+      </div>
+    </>
   );
 }
