@@ -3,16 +3,19 @@ import { CreateTeamDialog } from "@/components/CreateTeamDialog";
 import { Button } from "@/components/ui/button";
 import { Heart, Users } from "lucide-react";
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 
 export function Match() {
   const [showCreateTeam, setShowCreateTeam] = useState(false);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
-        <h1 className="text-xl font-bold text-foreground md:hidden">Find Teammates</h1>
-      </div>
+    <>
+      <SEO />
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
+          <h1 className="text-xl font-bold text-foreground md:hidden">Find Teammates</h1>
+        </div>
 
       <div className="px-4 space-y-6 pb-20 md:pb-4">
         {/* Create Team Section */}
@@ -42,6 +45,7 @@ export function Match() {
       </div>
 
       <CreateTeamDialog open={showCreateTeam} onOpenChange={setShowCreateTeam} />
-    </div>
+      </div>
+    </>
   );
 }
